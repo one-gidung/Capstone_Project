@@ -22,8 +22,6 @@ class Upbit:
         return candles
 
     def get_current_price(self, market):
-        if market not in self.__krw_markets.keys():
-            return None
         cp = self.__upbit.get_ticker(market)
         print(cp)
         return cp
