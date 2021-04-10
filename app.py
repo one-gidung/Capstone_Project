@@ -42,7 +42,7 @@ def telegram():
         result = 'No market parameter'
 
     if text[0] == '/code':
-        market = 'KRW-'+market
+        market = ['KRW-'+market]
         result = upbit.get_current_price(market)
         requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={market}의 현재가는 {result}입니다.')
 
