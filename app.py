@@ -33,8 +33,9 @@ def telegram():
     result = 'fail'
     if text == '/code':
         result = 'success'
-    requests.get(f'https://api.telegram.org/bot1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps/sendMessage?chat_id=1569568717&text=qwer')
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}')
     return '', 200
+
 
 @app.route('/')
 def root():
@@ -60,4 +61,4 @@ def root():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', threaded=False)
+    app.run(host='0.0.0.0',port=443, threaded=False)
