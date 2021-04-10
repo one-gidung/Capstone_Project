@@ -1,3 +1,4 @@
 static
 venv
 flask_server_swagger.py
+.idea
