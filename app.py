@@ -29,7 +29,7 @@ api_url = 'https://api.telegram.org'
 def telegram():
     print(request.get_json())
     chat_id = request.get_json().get('message').get('from').get('id')
-    text = request.get_json()['message']['text'].strip()
+    text = request.get_json()['message']['text']
     result = 'fail'
     if text == '/code':
         result = 'success'
