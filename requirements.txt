@@ -22,8 +22,6 @@ upbitpy==1.0.1
 Markdown==3.3.4
 oauthlib==3.1.0
 idna==2.8
-tensorflow==2.4.1
-tensorboard==2.4.1
 flatbuffers==1.12
 wrapt==1.12.1
 astunparse==1.6.3
