@@ -1,6 +1,5 @@
-# import requests
-#
-# from upbit import Upbit
+import requests
+
 # import numpy as np
 # import tensorflow as tf
 from flask import Flask, request
@@ -12,8 +11,8 @@ app = Flask(__name__)
 upbit = Upbit()
 upbit.get_hour_candles('KRW-BTC')
 
-# token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
-# api_url = 'https://api.telegram.org'
+token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
+api_url = 'https://api.telegram.org'
 #
 # load = tf.saved_model.load('mnist/1')
 # load_inference = load.signatures["serving_default"]
@@ -25,16 +24,16 @@ upbit.get_hour_candles('KRW-BTC')
 #     result = load_inference(tf.constant(data['images'], dtype=tf.float32) / 255.0)
 #     return str(np.argmax(result['dense_1'].numpy()))
 
-#
-# @app.route(f'{token}', methods=['POST'])
-# def telegram():
-#     print(request.get_json())
-#     chat_id = request.get_json().get('message').get('from').get('id')
-#     text = request.get_json()['message']['text'].strip()
-#     result = 'fail'
-#     if text == '/code':
-#         result = 'success'
-#     requests.get(f'{api_url}/bot{token}/sendMessage?chat_id{chat_id}&text={result}')
+
+@app.route(f'{token}', methods=['POST'])
+def telegram():
+    print(request.get_json())
+    chat_id = request.get_json().get('message').get('from').get('id')
+    text = request.get_json()['message']['text'].strip()
+    result = 'fail'
+    if text == '/code':
+        result = 'success'
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id{chat_id}&text={result}')
 
 
 @app.route('/')
