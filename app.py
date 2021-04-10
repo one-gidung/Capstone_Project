@@ -37,7 +37,7 @@ def telegram():
     try:
         market = text[1]
     except IndexError:
-        market = None
+        market = ''
     if market is None or market == '':
         result = 'No market parameter'
 
