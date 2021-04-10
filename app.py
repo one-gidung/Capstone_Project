@@ -25,11 +25,11 @@ api_url = 'https://api.telegram.org'
 #     return str(np.argmax(result['dense_1'].numpy()))
 
 
-@app.route('/1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps', methods=['POST'])
+@app.route(f'/{token}', methods=['POST'])
 def telegram():
-    print(request.get_json())
-    chat_id = request.get_json().get('message').get('from').get('id')
-    text = request.get_json()['message']['text']
+    # print(request.get_json())
+    chat_id = request.json['message']['from']['id']
+    text = request.json['message']['text']
     result = 'fail'
     if text == '/code':
         result = 'success'
