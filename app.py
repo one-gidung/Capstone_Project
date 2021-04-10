@@ -32,7 +32,7 @@ def telegram():
     print(request.get_json())
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
-    mtype = request.json['type']
+    mtype = request.get_json()['message']['ectities']['type']
 
     print('\n', text)
     result = ''
