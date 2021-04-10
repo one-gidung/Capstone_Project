@@ -31,9 +31,15 @@ def telegram():
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
     print('\n',text)
+    try:
+        market = text[1]
+    except IndexError:
+        market = None
+    if market is None or market == '':
+        return 'No market parameter'
 
     if text[0] == '/code':
-        candles = upbit.get_hour_candles(text[1])
+        candles = upbit.get_hour_candles(market)
 
 
 
