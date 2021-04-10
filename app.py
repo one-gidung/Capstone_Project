@@ -33,7 +33,7 @@ def telegram():
     result = 'fail'
     if text == '/code':
         result = 'success'
-    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={result}+{text}')
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}')
     return '',200
 
 @app.route('/')
