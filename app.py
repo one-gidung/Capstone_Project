@@ -29,13 +29,15 @@ api_url = 'https://api.telegram.org'
 def telegram():
     print(request.get_json())
     chat_id = request.get_json().get('message').get('from').get('id')
-    text = request.get_json()['message']['text'].strip()
+    text = request.get_json()['message']['text'].split()
     print('\n',text)
-    result = 'fail'
-    if text == '/code':
-        result = 'success'
 
-    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}+{result}')
+    if text[0] == '/code':
+        candles = upbit.get_hour_candles(text[1])
+
+
+
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}+{candles}')
 
     return '', 200
 
