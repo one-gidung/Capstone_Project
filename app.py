@@ -13,6 +13,8 @@ upbit.get_hour_candles('KRW-BTC')
 
 token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
 api_url = 'https://api.telegram.org'
+
+
 #
 # load = tf.saved_model.load('mnist/1')
 # load_inference = load.signatures["serving_default"]
@@ -30,22 +32,22 @@ def telegram():
     print(request.get_json())
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
-    print('\n',text)
+    print('\n', text)
+    result = ''
     try:
         market = text[1]
     except IndexError:
         market = None
     if market is None or market == '':
-        return 'No market parameter'
+        result = 'No market parameter'
 
     if text[0] == '/code':
-        candles = upbit.get_hour_candles(market)
+        result = upbit.get_hour_candles(market)
 
-
-
-    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}+{candles}')
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={text}+{result}')
 
     return '', 200
+
 
 @app.route('/')
 def root():
@@ -66,7 +68,6 @@ def root():
         dataset.append(candle['trade_price'])
         i += 1
     return render_template('chart.html', **locals())
-
 
 
 if __name__ == '__main__':
