@@ -32,21 +32,31 @@ def telegram():
     print(request.get_json())
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
+    mtype = request.json['type']
+
     print('\n', text)
     result = ''
-    try:
-        market = text[1]
-    except IndexError:
-        market = ''
-    if market is None or market == '':
-        result = 'No market parameter'
+    if mtype == 'bot_command':
+        if text[0] == '/code':
+            try:
+                market = text[1]
+                if market is None or market == '':
+                    result = 'No market parameter'
+                else:
+                    market = ['KRW-' + market]
+                    result = upbit.get_current_price(market)
+                    send_message(chat_id,f'{market}의 현재가는 {result}입니다.' )
+            except IndexError:
+                send_message(chat_id, '화폐를 입력해주세요.')
+                market = ''
 
-    if text[0] == '/code':
-        market = ['KRW-'+market]
-        result = upbit.get_current_price(market)
-        requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={market}의 현재가는 {result}입니다.')
-
+        else:
+            pass
+    else:
+        result = text
     return '', 200
+def send_message(chat_id, message):
+    requests.get(f'{api_url}/bot{token}/sendMessage?chat_id={chat_id}&text={message}')
 
 
 @app.route('/')
