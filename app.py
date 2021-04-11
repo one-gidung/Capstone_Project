@@ -11,6 +11,7 @@ app = Flask(__name__)
 upbit = Upbit()
 # upbit.get_hour_candles('KRW-BTC')
 
+#https://api.telegram.org/bot1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps/setWebhook?url=https://deepredic.herokuapp.com/1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps
 token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
 api_url = 'https://api.telegram.org'
 bot = telegram.Bot(token)
@@ -30,7 +31,7 @@ bot = telegram.Bot(token)
 @app.route(f'/{token}', methods=['POST'])
 def telegram_response():
     print(request.get_json())
-    update = telegram.update.Update.de_json(request.get_json(force=True))
+    update = telegram.update.Update.de_json(request.get_json(force=True), bot=bot)
     print(update)
     chat_id = None
     text = None
