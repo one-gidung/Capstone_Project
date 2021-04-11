@@ -13,7 +13,7 @@ upbit = Upbit()
 
 token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
 api_url = 'https://api.telegram.org'
-
+bot = telegram.Bot(token)
 
 #
 # load = tf.saved_model.load('mnist/1')
@@ -30,9 +30,11 @@ api_url = 'https://api.telegram.org'
 @app.route(f'/{token}', methods=['POST'])
 def telegram_response():
     print(request.get_json())
-    print()
+    update = telegram.update.Update.de_json(request.get_json(force=True))
+    print(update)
+    chat_id = request.get_json().get('message').get('from').get('id')
+
     try:
-        chat_id = request.get_json().get('message').get('from').get('id')
         text = request.get_json()['message']['text'].split()
         date = request.get_json()['message']['date']
     except:
@@ -86,4 +88,4 @@ def root():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='0.0.0.0', threaded=False)
+    app.run(host='0.0.0.0',port=8443, threaded=False)
