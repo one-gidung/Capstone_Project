@@ -36,7 +36,7 @@ def telegram_response():
     try:
         entities = request.get_json()['message']['entities'][0]['type']
         print(entities, request.get_json()['message']['entities'][0]['length'])
-    except [IndexError, KeyError]:
+    except [BaseException, KeyError, IndexError]:
         pass
     print('\n', text)
     result = ''
