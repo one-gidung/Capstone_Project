@@ -33,12 +33,19 @@ def telegram_response():
     print()
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
-    date = str(request.get_json()['message']['date'])
+    date = request.get_json()['message']['date']
     if text[0][0] == '/':
         entities = request.get_json().get('message').get('entities')
         print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
+        if text[0] == '/code':
+            try:
+                market = ['KRW-' + text[1]]
+                result = upbit.get_current_price(market)
+                send_message(chat_id, f'{text[1]}의 현재가는 {result["trade_price"]}입니다.')
+            except IndexError:
+                send_message(chat_id, '화폐를 입력해주세요.')
 
-    print(f'\n{text}\n{datetime.datetime.strptime(date,"%Y%m%d %H:%M:%S")}')
+    print(f'\n{text}\n{datetime.datetime.fromtimestamp(date)}')
 
     result = ''
 
