@@ -41,7 +41,7 @@ def telegram_response():
             try:
                 market = ['KRW-' + text[1]]
                 result = upbit.get_current_price(market)
-                send_message(chat_id, f'{text[1]}의 현재가는 {result["trade_price"]}입니다.')
+                send_message(chat_id, f'{text[1]}의 현재가는 {result[0]["trade_price"]}입니다.')
             except IndexError:
                 send_message(chat_id, '화폐를 입력해주세요.')
 
