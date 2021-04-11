@@ -50,26 +50,6 @@ def telegram_response():
 
     print(f'\n{text}\n{datetime.datetime.fromtimestamp(date)}')
 
-    result = ''
-
-    # if mtype == 'bot_command':
-    #     if text[0] == '/code':
-    #         try:
-    #             market = text[1]
-    #             if market is None or market == '':
-    #                 result = 'No market parameter'
-    #             else:
-    #                 market = ['KRW-' + market]
-    #                 result = upbit.get_current_price(market)
-    #                 send_message(chat_id, f'{market}의 현재가는 {result["trade_price"]}입니다.')
-    #         except IndexError:
-    #             send_message(chat_id, '화폐를 입력해주세요.')
-    #             market = ''
-    #
-    #     else:
-    #         pass
-    # else:
-    #     result = text
     return '', 200
 
 
