@@ -9,7 +9,7 @@ from upbit import Upbit
 
 app = Flask(__name__)
 upbit = Upbit()
-upbit.get_hour_candles('KRW-BTC')
+# upbit.get_hour_candles('KRW-BTC')
 
 token = '1787156675:AAE6V94s-0ov58WebD4mzhsgjSkms4a0jps'
 api_url = 'https://api.telegram.org'
