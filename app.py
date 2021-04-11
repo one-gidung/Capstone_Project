@@ -33,12 +33,12 @@ def telegram_response():
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
     date = request.get_json()['message']['date']
-    try:
-        entities = request.get_json()['message']
+    if text[0][0] == '/':
+        entities = request.get_json().get('message').get('entities')
         print(entities)
-    except:
-        pass
-    print('\n', text)
+
+    print(f'\n{text}\n{date.to_datetime(format="%Y%m%d %HH:%mm:%ss")}')
+
     result = ''
 
     # if mtype == 'bot_command':
