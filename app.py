@@ -34,8 +34,8 @@ def telegram_response():
     text = request.get_json()['message']['text'].split()
     date = request.get_json()['message']['date']
     try:
-        entities = request.get_json()['message']['entities'][0]['']
-        print(entities)
+        entities = request.get_json()['message']['entities'][0]['type']
+        print(entities, request.get_json()['message']['entities'][0]['length'])
     except IndexError:
         pass
     print('\n', text)
