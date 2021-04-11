@@ -1,10 +1,9 @@
 import requests
-
+import telegram
 # import numpy as np
 # import tensorflow as tf
 from flask import Flask, request
 from flask import render_template
-
 from upbit import Upbit
 
 app = Flask(__name__)
@@ -28,11 +27,17 @@ api_url = 'https://api.telegram.org'
 
 
 @app.route(f'/{token}', methods=['POST'])
-def telegram():
+def telegram_response():
     print(request.get_json())
+    print()
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
-
+    date = request.get_json()['message']['date']
+    try:
+        entities = request.get_json()['message']['entities'][0]['']
+        print(entities)
+    except IndexError:
+        pass
     print('\n', text)
     result = ''
 
