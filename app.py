@@ -36,7 +36,7 @@ def telegram_response():
     date = str(request.get_json()['message']['date'])
     if text[0][0] == '/':
         entities = request.get_json().get('message').get('entities')
-        print(entities)
+        print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
 
     print(f'\n{text}\n{datetime.datetime.strptime(date,"%Y%m%d %H:%M:%S")}')
 
