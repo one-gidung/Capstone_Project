@@ -46,6 +46,8 @@ def telegram_response():
             # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
             if text[0] == '/start':
                 send_message(chat_id, 'We\'re making chat bot. \nbut you can use \'/code {name}\' command only.')
+            elif text[0] =='/help':
+                send_message(chat_id, 'you can get current trade price in Upbit\nusing \'/code {currency code}\' command.')
 
             elif text[0] == '/code':
                 try:
