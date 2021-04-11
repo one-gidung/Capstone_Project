@@ -32,14 +32,15 @@ def telegram_response():
     print(request.get_json())
     update = telegram.update.Update.de_json(request.get_json(force=True))
     print(update)
-    chat_id = request.get_json().get('message').get('from').get('id')
+    chat_id = None
+    text = None
+    date = None
+    if request.get_json().get('message') is not None:
+        chat_id = request.get_json().get('message').get('from').get('id')
+        text = request.get_json().get('message').get('text').split()
+        date = request.get_json().get('message').get('date')
 
-    try:
-        text = request.get_json()['message']['text'].split()
-        date = request.get_json()['message']['date']
-    except:
-        pass
-    if text[0][0] == '/':  # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
+    elif text[0][0] == '/':  # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
         # entities = request.get_json().get('message').get('entities')
         # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
         if text[0] == '/start':
@@ -54,6 +55,8 @@ def telegram_response():
                 send_message(chat_id, '올바른 화폐를 입력해주세요.')
         else:
             send_message(chat_id, '구현되지 않은 명령어입니다. \ndevelper\'s email: hyngsk.o@gmail.com')
+    else:
+        pass
     # else:
     #     send_message(chat_id, '올바르지 않은 명령어입니다. \n명령어 포맷 : 영문 소문자 \ndevelper\'s email: hyngsk.o@gmail.com')
     print(f'{datetime.datetime.fromtimestamp(date)} : {text}')
