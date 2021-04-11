@@ -34,9 +34,9 @@ def telegram_response():
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
     date = request.get_json()['message']['date']
-    if text[0][0] == '/'or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
-        entities = request.get_json().get('message').get('entities')
-        print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
+    if text[0][0] == '/': # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
+        # entities = request.get_json().get('message').get('entities')
+        # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
         if text[0] == '/code':
             try:
                 market = ['KRW-' + text[1]]
