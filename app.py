@@ -44,6 +44,9 @@ def telegram_response():
                 send_message(chat_id, f'{text[1]}의 현재가는 {result[0]["trade_price"]}입니다.')
             except:
                 send_message(chat_id, '올바른 화폐를 입력해주세요.')
+        else:
+            send_message(chat_id, '구현되지 않은 명령어입니다. \ndevelper\'s email: hyngsk.o@gmail.com')
+
 
     print(f'\n{text}\n{datetime.datetime.fromtimestamp(date)}')
 
