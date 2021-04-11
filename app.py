@@ -1,3 +1,4 @@
+import datetime
 import requests
 import telegram
 # import numpy as np
@@ -32,12 +33,12 @@ def telegram_response():
     print()
     chat_id = request.get_json().get('message').get('from').get('id')
     text = request.get_json()['message']['text'].split()
-    date = request.get_json()['message']['date']
+    date = str(request.get_json()['message']['date'])
     if text[0][0] == '/':
         entities = request.get_json().get('message').get('entities')
         print(entities)
 
-    print(f'\n{text}\n{date.to_datetime(format="%Y%m%d %HH:%mm:%ss")}')
+    print(f'\n{text}\n{datetime.datetime.strptime(date,"%Y%m%d %H:%M:%S")}')
 
     result = ''
 
