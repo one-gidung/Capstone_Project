@@ -41,26 +41,27 @@ def telegram_response():
         text = request.get_json().get('message').get('text').split()
         date = request.get_json().get('message').get('date')
 
-    elif text[0][0] == '/':  # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
-        # entities = request.get_json().get('message').get('entities')
-        # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
-        if text[0] == '/start':
-            send_message(chat_id, 'We\'re making chat bot. \nbut you can use \'/code {name}\' command only.')
+        if text[0][0] == '/':  # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
+            # entities = request.get_json().get('message').get('entities')
+            # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
+            if text[0] == '/start':
+                send_message(chat_id, 'We\'re making chat bot. \nbut you can use \'/code {name}\' command only.')
 
-        elif text[0] == '/code':
-            try:
-                market = ['KRW-' + text[1]]
-                result = upbit.get_current_price(market)
-                send_message(chat_id, f'{text[1]}의 현재가는 {result[0]["trade_price"]}입니다.')
-            except:
-                send_message(chat_id, '올바른 화폐를 입력해주세요.')
+            elif text[0] == '/code':
+                try:
+                    market = ['KRW-' + text[1]]
+                    result = upbit.get_current_price(market)
+                    send_message(chat_id, f'{text[1]}의 현재가는 {result[0]["trade_price"]}입니다.')
+                except:
+                    send_message(chat_id, '올바른 화폐를 입력해주세요.')
+            else:
+                send_message(chat_id, '구현되지 않은 명령어입니다. \ndevelper\'s email: hyngsk.o@gmail.com')
+            print(f'{datetime.datetime.fromtimestamp(date)} : {text}')
         else:
-            send_message(chat_id, '구현되지 않은 명령어입니다. \ndevelper\'s email: hyngsk.o@gmail.com')
-    else:
-        pass
+            pass
     # else:
     #     send_message(chat_id, '올바르지 않은 명령어입니다. \n명령어 포맷 : 영문 소문자 \ndevelper\'s email: hyngsk.o@gmail.com')
-    print(f'{datetime.datetime.fromtimestamp(date)} : {text}')
+
 
     return '', 200
 
