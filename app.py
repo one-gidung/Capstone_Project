@@ -37,6 +37,9 @@ def telegram_response():
     if text[0][0] == '/': # or text[0][1:] not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz':
         # entities = request.get_json().get('message').get('entities')
         # print(f'length : {entities[0]["length"]}\ntype : {entities[0]["type"]}')
+        if text[0] == '/start':
+            send_message(chat_id, 'We\'re making chat bot. but you can use \'/code {name}\' command only.')
+
         if text[0] == '/code':
             try:
                 market = ['KRW-' + text[1]]
@@ -46,8 +49,8 @@ def telegram_response():
                 send_message(chat_id, '올바른 화폐를 입력해주세요.')
         else:
             send_message(chat_id, '구현되지 않은 명령어입니다. \ndevelper\'s email: hyngsk.o@gmail.com')
-    else:
-        send_message(chat_id, '올바르지 않은 명령어입니다. \n명령어 포맷 : 영문 소문자 \ndevelper\'s email: hyngsk.o@gmail.com')
+    # else:
+    #     send_message(chat_id, '올바르지 않은 명령어입니다. \n명령어 포맷 : 영문 소문자 \ndevelper\'s email: hyngsk.o@gmail.com')
     print(f'\n{text}\n{datetime.datetime.fromtimestamp(date)}')
 
     return '', 200
